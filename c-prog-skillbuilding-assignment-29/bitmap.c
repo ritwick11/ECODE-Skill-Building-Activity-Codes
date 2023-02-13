@@ -75,33 +75,24 @@ Ex (15,20, 50,30), Invalidamount(11, 22,33,54)
 
 unsigned int ReturnBalance(const softD *parr, unsigned int itemCode, unsigned int customerAmount, int length)
 {
-    for(int i=0; i<length; i++)
+    int bal=Invalid;
+    if(customerAmount<=100)
     {
-        if(itemCode == parr[i].itemCode)
+        for(int i=0; i<length; i++)
         {
-            if(customerAmount<100)
-            {
-                if(customerAmount%5==0)
-                {
-                    return (customerAmount-parr[i].Price);
-                }
-                else
-                {
-                    return -1;
-                }
+            if(itemCode==parr[i].itemCode)
+            {   
+                if(customerAmount>=parr[i].Price)
+                
+                    bal = (customerAmount-parr[i].Price);
+                    return bal;
             }
-            else
-            {
-                return -1;
-            }
-        }
-        else
-        {
-            continue;
         }
     }
-        return -1;
+    else
+        return bal;
 }
+
 
 /*
   The function returns the available qty of argument passed
@@ -110,12 +101,14 @@ unsigned int ReturnBalance(const softD *parr, unsigned int itemCode, unsigned in
 */
 unsigned int AvailableQty(const softD *parr,unsigned int itemCode, int length)
 {
+    int qty = Invalid;
     for(int i=0; i<length; i++)
     {
         if(itemCode == parr[i].itemCode)
         {
-            return parr[i].quantity;
+            qty = parr[i].quantity;
+            return qty;
         }
     }
+    return qty;
 }
-
